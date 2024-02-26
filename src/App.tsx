@@ -1,3 +1,4 @@
+import { Post } from './components/posts'
 import { Header } from './components/header'
 import { Sidebar } from './components/sidebar'
 
@@ -6,10 +7,15 @@ export function App() {
     <div>
       <Header />
 
-      <div className="max-w-[70rem] flex mx-auto my-8 px-1">
+      <div className="max-w-[70rem] flex flex-col mx-auto my-8 px-1 gap-8 lg:flex-row">
         <Sidebar />
 
-        <main></main>
+        <main className="flex flex-col gap-8">
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </main>
       </div>
     </div>
   )
