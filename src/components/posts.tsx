@@ -39,6 +39,16 @@ export function Post({ onComentCreated }: NewComentProps) {
     localStorage.setItem('coments', JSON.stringify(comentsArray))
   }
 
+  function onComentDeleted(id: string) {
+    const comentsArray = coments.filter((coments) => {
+      return coments.id !== id
+    })
+
+    setComents(comentsArray)
+
+    localStorage.setItem('coments', JSON.stringify(comentsArray))
+  }
+
   const handleContentChanged = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaContent(event.target.value)
 
@@ -139,7 +149,13 @@ export function Post({ onComentCreated }: NewComentProps) {
 
       <div className="pt-2 space-y-6">
         {coments.map((comment) => {
-          return <Coment key={comment.id} coment={comment} />
+          return (
+            <Coment
+              key={comment.id}
+              coment={comment}
+              onComentDeleted={onComentDeleted}
+            />
+          )
         })}
       </div>
     </div>

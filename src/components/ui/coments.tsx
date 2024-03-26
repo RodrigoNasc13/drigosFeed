@@ -8,9 +8,11 @@ interface ComentProps {
     date: Date
     content: string
   }
+
+  onComentDeleted: (id: string) => void
 }
 
-export function Coment({ coment }: ComentProps) {
+export function Coment({ coment, onComentDeleted }: ComentProps) {
   return (
     <div className="flex gap-4">
       <img
@@ -34,7 +36,7 @@ export function Coment({ coment }: ComentProps) {
             </span>
           </div>
 
-          <button className="size-3">
+          <button onClick={() => onComentDeleted(coment.id)} className="size-3">
             <Trash className="size-5 text-neutral-300 animate-pulse" />
           </button>
         </div>
