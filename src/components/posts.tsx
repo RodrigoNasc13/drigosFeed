@@ -14,7 +14,15 @@ interface NewComentProps {
 export function Post({ onComentCreated }: NewComentProps) {
   const [textareaContent, setTextareaContent] = useState('')
   const [shouldShowButton, setShouldShowButton] = useState(false)
-  const [coments, setComents] = useState<Coment[]>([])
+  const [coments, setComents] = useState<Coment[]>(() => {
+    const comentOnStorage = localStorage.getItem('coments')
+
+    if (comentOnStorage) {
+      return JSON.parse(comentOnStorage)
+    }
+
+    return []
+  })
 
   function handleComentCreation(content: string) {
     const newComent = {
@@ -24,6 +32,11 @@ export function Post({ onComentCreated }: NewComentProps) {
     }
 
     setComents([newComent, ...coments])
+    const comentsArray = [newComent, ...coments]
+
+    setComents(comentsArray)
+
+    localStorage.setItem('coments', JSON.stringify(comentsArray))
   }
 
   const handleContentChanged = (event: ChangeEvent<HTMLTextAreaElement>) => {
