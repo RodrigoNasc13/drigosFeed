@@ -12,9 +12,6 @@ export function App() {
 
         <main className="flex flex-col gap-8">
           <Post />
-          <Post />
-          <Post />
-          <Post />
         </main>
       </div>
     </div>

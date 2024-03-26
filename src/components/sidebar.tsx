@@ -30,9 +30,9 @@ export function Sidebar() {
           <a
             href=""
             className="
-              ring-2 ring-emerald-500 text-gray-200 outline-none rounded-lg py-4 px-6
+              ring-2 ring-emerald-500 text-gray-200 bg-emerald-600 outline-none rounded-lg py-4 px-6
               focus-within:bg-purple-600 focus-within:text-gray-200 focus-within:ring-purple-800
-              hover:bg-purple-600 hover:ring-purple-800
+              hover:bg-purple-600 hover:ring-purple-80
               lg:group-hover:ring-purple-600
             "
           >

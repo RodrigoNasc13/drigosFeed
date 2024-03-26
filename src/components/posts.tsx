@@ -1,6 +1,50 @@
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { Coment } from './ui/coments'
 
-export function Post() {
+interface Coment {
+  id: string
+  date: Date
+  content: string
+}
+
+interface NewComentProps {
+  onComentCreated: (content: string) => void
+}
+
+export function Post({ onComentCreated }: NewComentProps) {
+  const [textareaContent, setTextareaContent] = useState('')
+  const [shouldShowButton, setShouldShowButton] = useState(false)
+  const [coments, setComents] = useState<Coment[]>([])
+
+  function handleComentCreation(content: string) {
+    const newComent = {
+      id: crypto.randomUUID(),
+      date: new Date(),
+      content,
+    }
+
+    setComents([newComent, ...coments])
+  }
+
+  const handleContentChanged = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setTextareaContent(event.target.value)
+
+    if (event.target.value.length >= 1) {
+      setShouldShowButton(true)
+    } else {
+      setShouldShowButton(false)
+    }
+  }
+
+  const handleSaveComent = (event: FormEvent) => {
+    event.preventDefault()
+
+    if (textareaContent.trim() !== '') {
+      handleComentCreation(textareaContent)
+      setTextareaContent('')
+    }
+  }
+
   return (
     <div className="bg-zinc-800 rounded-lg p-4 space-y-6 lg:p-10 group">
       <div className="space-y-6">
@@ -46,12 +90,14 @@ export function Post() {
       <div className="w-full border border-emerald-500 lg:group-hover:border-purple-600" />
 
       <div>
-        <form action="">
+        <form onSubmit={handleSaveComent}>
           <div className="space-y-4">
             <strong className="text-sm text-neutral-200 lg:text-base">
               Deixe seu feedback
             </strong>
             <textarea
+              onChange={handleContentChanged}
+              value={textareaContent}
               className="w-full max-h-[6rem] p-4 resize-none outline-none text-sm text-neutral-400 bg-neutral-900 rounded-lg 
               lg:text-base
               focus-within:ring-2 focus-within:ring-purple-600 
@@ -59,22 +105,29 @@ export function Post() {
               placeholder="Escreva aqui o seu comentário..."
             />
             <div className="flex justify-center lg:justify-start">
-              <button
-                className="
-                px-6 py-3 outline-none text-neutral-200 bg-emerald-600 rounded-lg font-bold
-                hover:bg-purple-600
-                focus-within:bg-purple-600
-              "
-              >
-                Publicar
-              </button>
+              {shouldShowButton ? (
+                <button
+                  onClick={() => onComentCreated(textareaContent)}
+                  className="
+                    px-6 py-3 outline-none text-neutral-200 bg-emerald-600 rounded-lg font-bold
+                    hover:bg-purple-600
+                    focus-within:bg-purple-600
+                  "
+                >
+                  Publicar
+                </button>
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
         </form>
       </div>
 
-      <div className="pt-2">
-        <Coment />
+      <div className="pt-2 space-y-6">
+        {coments.map((comment) => {
+          return <Coment key={comment.id} coment={comment} />
+        })}
       </div>
     </div>
   )

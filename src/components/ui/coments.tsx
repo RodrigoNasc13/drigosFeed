@@ -1,6 +1,16 @@
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { Trash } from 'lucide-react'
 
-export function Coment() {
+interface ComentProps {
+  coment: {
+    id: string
+    date: Date
+    content: string
+  }
+}
+
+export function Coment({ coment }: ComentProps) {
   return (
     <div className="flex gap-4">
       <img
@@ -17,7 +27,10 @@ export function Coment() {
             </strong>
 
             <span className="text-xs text-gray-500 lg:text-sm">
-              Cerca de 2h
+              {formatDistanceToNow(coment.date, {
+                locale: ptBR,
+                addSuffix: true,
+              })}
             </span>
           </div>
 
@@ -28,7 +41,7 @@ export function Coment() {
 
         <div>
           <span className="text-sm text-neutral-300 lg:text-base">
-            Muito Incrível, otimo design!
+            {coment.content}
           </span>
         </div>
       </div>
