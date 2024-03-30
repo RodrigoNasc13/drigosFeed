@@ -102,10 +102,13 @@ export function Post({ onComentCreated }: NewComentProps) {
           <p className="text-sm text-neutral-400 lg:text-base">Fala galeraaa</p>
 
           <p className="text-sm text-neutral-400 lg:text-base">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-            tenetur esse rerum minima minus soluta quos veritatis! Adipisci
-            animi, expedita tenetur eaque inventore veritatis ipsam nesciunt
-            fuga dolor, ab sunt!
+            Nesse projeto aqui eu aprendi muito mais sobre componentes e estados
+            no react, usando webAPI para armazenagem de dados e alguns truques a
+            mais para a organização dos comentários. Nesse projeto eu quis me
+            desafiar a fazer essa feature dos comentários sem nenhum back-end e
+            deu super certo e o projeto é focado apenas nisso! Agradeço que você
+            tenha visto um pouco do meu trabalho e caso queira entrar em contato
+            meu email é: rodrigonasct13@gmail.com
           </p>
         </div>
       </div>

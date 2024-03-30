@@ -11,7 +11,11 @@ export function App() {
         <Sidebar />
 
         <main className="flex flex-col gap-8">
-          <Post />
+          <Post
+            onComentCreated={function (): void {
+              throw new Error('Function not implemented.')
+            }}
+          />
         </main>
       </div>
     </div>
